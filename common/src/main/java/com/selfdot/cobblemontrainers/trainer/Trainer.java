@@ -26,6 +26,7 @@ public class Trainer extends JsonFile {
     private boolean canOnlyBeatOnce;
     private long cooldownSeconds;
     private int partyMaximumLevel;
+    private long moneyReward;
 
     public Trainer(CobblemonTrainers mod, String name, String group) {
         super(mod);
@@ -121,6 +122,14 @@ public class Trainer extends JsonFile {
         save();
     }
 
+    public long getMoneyReward() {
+        return this.moneyReward;
+    }
+
+    public void setMoneyReward(long moneyReward) {
+        this.moneyReward = moneyReward;
+    }
+
     public int getTeamSize() {
         return team.size();
     }
@@ -152,6 +161,7 @@ public class Trainer extends JsonFile {
         canOnlyBeatOnce = false;
         cooldownSeconds = 0;
         partyMaximumLevel = 100;
+        moneyReward = 0;
     }
 
     @Override
@@ -164,6 +174,7 @@ public class Trainer extends JsonFile {
         team = new ArrayList<>();
         jsonObject.getAsJsonArray(DataKeys.TRAINER_TEAM)
             .forEach(pokemonJson -> team.add(new TrainerPokemon(pokemonJson)));
+
         winCommand = jsonObject.has(DataKeys.TRAINER_WIN_COMMAND) ?
             jsonObject.get(DataKeys.TRAINER_WIN_COMMAND).getAsString() : "";
 
@@ -182,6 +193,9 @@ public class Trainer extends JsonFile {
         if (jsonObject.has(DataKeys.PLAYER_PARTY_MAXIMUM_LEVEL)) {
             partyMaximumLevel = jsonObject.get(DataKeys.PLAYER_PARTY_MAXIMUM_LEVEL).getAsInt();
         }
+        if (jsonObject.has(DataKeys.TRAINER_MONEY_REWARD)) {
+            moneyReward = jsonObject.get(DataKeys.TRAINER_MONEY_REWARD).getAsLong();
+        }
     }
 
     @Override
@@ -195,6 +209,7 @@ public class Trainer extends JsonFile {
         jsonObject.addProperty(DataKeys.TRAINER_CAN_ONLY_BEAT_ONCE, canOnlyBeatOnce);
         jsonObject.addProperty(DataKeys.TRAINER_COOLDOWN_SECONDS, cooldownSeconds);
         jsonObject.addProperty(DataKeys.PLAYER_PARTY_MAXIMUM_LEVEL, partyMaximumLevel);
+        jsonObject.addProperty(DataKeys.TRAINER_MONEY_REWARD, moneyReward);
         return jsonObject;
     }
 
