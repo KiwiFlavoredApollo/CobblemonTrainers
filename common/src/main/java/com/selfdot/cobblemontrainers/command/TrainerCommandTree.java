@@ -212,7 +212,7 @@ public class TrainerCommandTree {
                     argument("trainer", string())
                     .suggests(new TrainerNameSuggestionProvider())
                     .then(RequiredArgumentBuilder.<ServerCommandSource, Long>
-                        argument("moneyReward", longArg())
+                        argument("moneyReward", longArg(0))
                         .executes(new SetMoneyRewardCommand())
                     )
                 )
