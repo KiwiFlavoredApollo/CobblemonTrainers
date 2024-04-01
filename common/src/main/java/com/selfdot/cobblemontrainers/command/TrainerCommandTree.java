@@ -231,6 +231,19 @@ public class TrainerCommandTree {
                 )
             )
             .then(LiteralArgumentBuilder.<ServerCommandSource>
+                literal("removedefeatrequirement")
+                .requires(sourceWithPermission(DataKeys.EDIT_COMMAND_PERMISSION, mod))
+                .then(RequiredArgumentBuilder.<ServerCommandSource, String>
+                    argument("trainer", string())
+                    .suggests(new TrainerNameSuggestionProvider())
+                    .then(RequiredArgumentBuilder.<ServerCommandSource, String>
+                        argument("defeatRequirement", string())
+                        .suggests(new TrainerNameSuggestionProvider())
+                        .executes(new RemoveDefeatRequirementCommand())
+                    )
+                )
+            )
+            .then(LiteralArgumentBuilder.<ServerCommandSource>
                 literal("setmoneyreward")
                 .requires(sourceWithPermission(DataKeys.EDIT_COMMAND_PERMISSION, mod))
                 .then(RequiredArgumentBuilder.<ServerCommandSource, String>
