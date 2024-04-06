@@ -253,7 +253,7 @@ public class TrainerCommandTree {
             )
             .then(LiteralArgumentBuilder.<ServerCommandSource>
                 literal("setmoneyreward")
-                .requires(sourceWithPermission(DataKeys.EDIT_COMMAND_PERMISSION, mod))
+                .requires(editCommandRequirement)
                 .then(RequiredArgumentBuilder.<ServerCommandSource, String>
                     argument("trainer", string())
                     .suggests(new TrainerNameSuggestionProvider())
