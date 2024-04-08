@@ -16,6 +16,7 @@ repositories {
     maven("https://maven.nucleoid.xyz/")
     maven("https://jitpack.io")
     mavenLocal()
+    maven("https://oss.sonatype.org/content/repositories/snapshots")
 }
 
 dependencies {
@@ -29,10 +30,10 @@ dependencies {
     modApi("curse.maven:cobblemon-687131:4977486")
     modApi(libs.architectury)
 
-    //shadowCommon group: 'commons-io', name: 'commons-io', version: '2.6'
-
-
     compileOnly("net.luckperms:api:${rootProject.property("luckperms_version")}")
+
+    compileOnly("org.projectlombok:lombok:1.18.32")
+    annotationProcessor("org.projectlombok:lombok:1.18.32")
 }
 
 tasks.withType<Test> {
